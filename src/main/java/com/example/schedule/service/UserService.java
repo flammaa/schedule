@@ -17,6 +17,8 @@ import java.util.Optional;
 public class UserService {
     private final UserRepository userRepository;
 
+
+
     public SignUpResponseDto signUp(String username, String email, String password) {
         User user = new User(username, email, password);
 
@@ -46,5 +48,31 @@ public class UserService {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "비밀번호가 일치하지 않습니다.");
         }
         findUser.updatePassword(newPassword);
+    }
+    @Transactional
+    public void updateUsername(Long id, String verifyPassword, String newUsername) {
+        User findUser = userRepository.findByIdOrElseThrow(id);
+
+        if(!findUser.getPassword().equals(verifyPassword)) {
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "비밀번호가 일치하지 않습니다.");
+        }
+        findUser.updateUsername(newUsername);
+    }
+
+    @Transactional
+    public void updateEmail(Long id, String verifyPassword, String newEmail) {
+        User findUser = userRepository.findByIdOrElseThrow(id);
+
+        if(!findUser.getPassword().equals(verifyPassword)) {
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "비밀번호가 일치하지 않습니다.");
+        }
+        findUser.updateEmail(newEmail);
+    }
+
+    public void delete(Long id) {
+
+        User findUser = userRepository.findByIdOrElseThrow(id);
+
+        userRepository.delete(findUser);
     }
 }
