@@ -1,7 +1,6 @@
-package com.example.schedule.dto;
+package com.example.schedule.domain.user.dto;
 
 import lombok.Getter;
-import org.hibernate.sql.Update;
 
 @Getter
 public class UpdatePasswordRequestDto {

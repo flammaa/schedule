@@ -1,7 +1,7 @@
-package com.example.schedule.controller;
+package com.example.schedule.domain.user.controller;
 
-import com.example.schedule.dto.*;
-import com.example.schedule.service.UserService;
+import com.example.schedule.domain.user.dto.*;
+import com.example.schedule.domain.user.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -64,5 +64,6 @@ public class UserController {
 
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
 
 }

@@ -1,9 +1,9 @@
-package com.example.schedule.service;
+package com.example.schedule.domain.user.service;
 
-import com.example.schedule.dto.SignUpResponseDto;
-import com.example.schedule.dto.UserResponseDto;
-import com.example.schedule.entity.User;
-import com.example.schedule.repository.UserRepository;
+import com.example.schedule.domain.user.dto.SignUpResponseDto;
+import com.example.schedule.domain.user.dto.UserResponseDto;
+import com.example.schedule.domain.user.entity.User;
+import com.example.schedule.domain.user.repository.UserRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -69,10 +69,14 @@ public class UserService {
         findUser.updateEmail(newEmail);
     }
 
+    @Transactional
     public void delete(Long id) {
 
         User findUser = userRepository.findByIdOrElseThrow(id);
 
         userRepository.delete(findUser);
     }
+
+
+
 }

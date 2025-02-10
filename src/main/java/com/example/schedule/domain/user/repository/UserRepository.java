@@ -1,11 +1,10 @@
-package com.example.schedule.repository;
+package com.example.schedule.domain.user.repository;
 
-import com.example.schedule.entity.User;
+import com.example.schedule.domain.user.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.lang.reflect.Member;
 
 public interface UserRepository extends JpaRepository<User, Long> {
     default User findByIdOrElseThrow(Long id) {
@@ -16,4 +15,5 @@ public interface UserRepository extends JpaRepository<User, Long> {
                                 "Does not exist id = " + id)
                 );
     }
+
 }
