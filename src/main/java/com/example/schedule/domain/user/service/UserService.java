@@ -17,8 +17,7 @@ import java.util.Optional;
 public class UserService {
     private final UserRepository userRepository;
 
-
-
+    @Transactional
     public SignUpResponseDto signUp(String username, String email, String password) {
         User user = new User(username, email, password);
 
@@ -27,6 +26,7 @@ public class UserService {
         return new SignUpResponseDto(savedUser.getId(), savedUser.getUsername(), savedUser.getEmail());
     }
 
+    @Transactional
     public UserResponseDto findById(Long id) {
 
         Optional<User> optionalUser = userRepository.findById(id);

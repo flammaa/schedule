@@ -16,4 +16,14 @@ public interface UserRepository extends JpaRepository<User, Long> {
                 );
     }
 
+    User findByEmail(String email);
+
+    //교안내용
+    //     public Long findByEmailAndPassword(String email, String password); {
+//         return USERS.Stream()
+//                 .filter(user -> user.getEmail().equals(email) && user.getPassword().equals(password))
+//                 .map(User::getId)
+//                 .findFirst()
+//                 .orElse(null);
+//    }
 }
