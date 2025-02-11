@@ -5,6 +5,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.Optional;
+
 
 public interface UserRepository extends JpaRepository<User, Long> {
     default User findByIdOrElseThrow(Long id) {
@@ -16,7 +18,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
                 );
     }
 
-    User findByEmail(String email);
+    Optional<User> findByEmail(String email); //option genereric user
 
     //교안내용
     //     public Long findByEmailAndPassword(String email, String password); {

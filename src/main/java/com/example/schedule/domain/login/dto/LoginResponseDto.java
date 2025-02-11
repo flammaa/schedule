@@ -1,5 +1,6 @@
 package com.example.schedule.domain.login.dto;
 
+import com.example.schedule.domain.user.entity.User;
 import lombok.Getter;
 
 @Getter
@@ -8,10 +9,9 @@ public class LoginResponseDto {
     private final String username;
     private final String email;
 
-
-    public LoginResponseDto(Long id, String username, String email) {
-        this.id = id;
-        this.username = username;
-        this.email = email;
+    public LoginResponseDto(User user) {
+        this.id = user.getId();
+        this.email = user.getEmail();
+        this.username = user.getUsername();
     }
 }

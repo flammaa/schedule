@@ -19,14 +19,15 @@ public class LoginService {
 
     @Transactional
     public LoginResponseDto login(String email, String password) {
-        User findUser = userRepository.findByEmail(email);
+        User findUser = userRepository.findByEmail(email)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "해당 이메일을 가진 사용자가 존재하지 않습니다."));
 
         if(!findUser.getPassword().equals(password)) {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "비밀번호가 일치하지 않습니다."); //로그인 시 이메일과 비밀번호가 일치하지 않을 경우 HTTP Status code 401을 반환합니다.
         }
-
-
+        return new LoginResponseDto(findUser);
     }
+
 
 //        Long index = userRepository.findByEmailAndPassword(email, password);
 
