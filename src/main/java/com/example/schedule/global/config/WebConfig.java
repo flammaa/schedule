@@ -1,11 +1,10 @@
-package com.example.schedule.config;
+package com.example.schedule.global.config;
 
-import com.example.schedule.filter.LoginFilter;
+import com.example.schedule.global.filter.LoginFilter;
 import jakarta.servlet.Filter;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration

@@ -1,6 +1,6 @@
 package com.example.schedule.domain.user.entity;
 
-import com.example.schedule.entity.BaseEntity;
+import com.example.schedule.global.entity.BaseEntity;
 import jakarta.persistence.*;
 import lombok.Getter;
 

@@ -4,6 +4,7 @@ import com.example.schedule.domain.user.dto.SignUpResponseDto;
 import com.example.schedule.domain.user.dto.UserResponseDto;
 import com.example.schedule.domain.user.entity.User;
 import com.example.schedule.domain.user.repository.UserRepository;
+import com.example.schedule.global.config.PasswordEncoder;
 import jakarta.transaction.Transactional;
 import jakarta.validation.constraints.NotBlank;
 import lombok.RequiredArgsConstructor;
@@ -17,10 +18,14 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class UserService {
     private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
 
     @Transactional
     public SignUpResponseDto signUp(String username, String email, String password) {
-        User user = new User(username, email, password);
+
+        String encodedPassword = passwordEncoder.encode(password);
+
+        User user = new User(username, email, encodedPassword);
 
         User savedUser = userRepository.save(user);
 
@@ -45,7 +50,7 @@ public class UserService {
     public void updatePassword(Long userId, String oldPassword, String newPassword) {
         User findUser = userRepository.findByIdOrElseThrow(userId);
 
-        if(!findUser.getPassword().equals(oldPassword)) {
+        if(!passwordEncoder.matches(oldPassword, findUser.getPassword())) {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "비밀번호가 일치하지 않습니다.");
         }
         findUser.updatePassword(newPassword);
@@ -54,7 +59,7 @@ public class UserService {
     public void updateUsername(Long userId, String verifyPassword, String newUsername) {
         User findUser = userRepository.findByIdOrElseThrow(userId);
 
-        if(!findUser.getPassword().equals(verifyPassword)) {
+        if(!passwordEncoder.matches(verifyPassword, findUser.getPassword())) {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "비밀번호가 일치하지 않습니다.");
         }
         findUser.updateUsername(newUsername);
@@ -64,7 +69,7 @@ public class UserService {
     public void updateEmail(Long userId, String verifyPassword, String newEmail) {
         User findUser = userRepository.findByIdOrElseThrow(userId);
 
-        if(!findUser.getPassword().equals(verifyPassword)) {
+        if(!passwordEncoder.matches(verifyPassword, findUser.getPassword())) {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "비밀번호가 일치하지 않습니다.");
         }
         findUser.updateEmail(newEmail);
@@ -74,7 +79,7 @@ public class UserService {
     public void delete(Long userId, @NotBlank String password) {
 
         User findUser = userRepository.findByIdOrElseThrow(userId);
-        if(!findUser.getPassword().equals(password)) {
+        if(!passwordEncoder.matches(password, findUser.getPassword())) {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "비밀번호가 일치하지 않습니다.");
         }
 

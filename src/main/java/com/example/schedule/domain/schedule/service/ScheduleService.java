@@ -5,6 +5,7 @@ import com.example.schedule.domain.schedule.entity.Schedule;
 import com.example.schedule.domain.schedule.repository.ScheduleRepository;
 import com.example.schedule.domain.user.entity.User;
 import com.example.schedule.domain.user.repository.UserRepository;
+import com.example.schedule.global.config.PasswordEncoder;
 import jakarta.transaction.Transactional;
 import jakarta.validation.constraints.NotBlank;
 import lombok.RequiredArgsConstructor;
@@ -22,6 +23,7 @@ public class ScheduleService {
 
     private final UserRepository userRepository;
     private final ScheduleRepository scheduleRepository;
+    private final PasswordEncoder passwordEncoder;
 
     public ScheduleResponseDto save(String title, String contents, Long userId) {
 
@@ -61,7 +63,7 @@ public class ScheduleService {
                 .orElseThrow(() -> new IllegalArgumentException("해당 스케줄 ID가 존재하지 않습니다. ID: " + scheduleId));
 
         User scheduleUser = findSchedule.getUser();
-        if (!scheduleUser.getPassword().equals(password)) {
+        if (!passwordEncoder.matches(password, scheduleUser.getPassword())) {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "비밀번호가 일치하지 않습니다.");
         }
         findSchedule.updateSchedule(newTitle, newContents);
@@ -72,6 +74,11 @@ public class ScheduleService {
     public void deleteSchedule(Long scheduleId, @NotBlank String password) {
         Schedule findSchedule = scheduleRepository.findByScheduleId(scheduleId)
                 .orElseThrow(() -> new IllegalArgumentException("해당 스케줄 ID가 존재하지 않습니다. ID: " + scheduleId));
+
+        User scheduleUser = findSchedule.getUser();
+        if (!passwordEncoder.matches(password, scheduleUser.getPassword())) {
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "비밀번호가 일치하지 않습니다.");
+        }
 
         scheduleRepository.delete(findSchedule);
     }
