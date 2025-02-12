@@ -25,7 +25,7 @@ public class LoginController {
             HttpServletRequest request
     ) {
         LoginResponseDto responseDto = loginService.login(dto.getEmail(), dto.getPassword());
-        Long userId = responseDto.getId();
+        Long userId = responseDto.getUserId();
 
         // 실패시 401 UNAUTHORIZED 응답 반환
         if (userId == null) {
@@ -39,7 +39,7 @@ public class LoginController {
         HttpSession session = request.getSession();
 
         // Session에 로그인 회원 정보를 저장한다.
-        session.setAttribute(Const.LOGIN_USER, responseDto.getId());
+        session.setAttribute(Const.LOGIN_USER, responseDto.getUserId());
 
         // 로그인 성공시
         return ResponseEntity.ok(responseDto);

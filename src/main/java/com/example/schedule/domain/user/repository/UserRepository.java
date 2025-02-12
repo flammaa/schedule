@@ -20,14 +20,6 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     Optional<User> findByEmail(String email); //option genereric user
 
-    Long userId(Long userId);
+    Optional<User> findByUserId(Long userId);
 
-    //교안내용
-    //     public Long findByEmailAndPassword(String email, String password); {
-//         return USERS.Stream()
-//                 .filter(user -> user.getEmail().equals(email) && user.getPassword().equals(password))
-//                 .map(User::getId)
-//                 .findFirst()
-//                 .orElse(null);
-//    }
 }

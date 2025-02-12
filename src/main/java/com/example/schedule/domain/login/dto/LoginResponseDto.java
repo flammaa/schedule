@@ -5,12 +5,12 @@ import lombok.Getter;
 
 @Getter
 public class LoginResponseDto {
-    private final Long id;
+    private final Long userId;
     private final String username;
     private final String email;
 
     public LoginResponseDto(User user) {
-        this.id = user.getId();
+        this.userId = user.getUserId();
         this.email = user.getEmail();
         this.username = user.getUsername();
     }

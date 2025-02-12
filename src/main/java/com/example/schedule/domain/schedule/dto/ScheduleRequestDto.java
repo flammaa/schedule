@@ -14,4 +14,6 @@ public class ScheduleRequestDto {
         this.title = title;
         this.contents = contents;
     }
+
+
 }

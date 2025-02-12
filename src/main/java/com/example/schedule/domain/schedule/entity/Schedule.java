@@ -4,7 +4,6 @@ import com.example.schedule.domain.user.entity.User;
 import com.example.schedule.entity.BaseEntity;
 import jakarta.persistence.*;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 
 @Getter
 @Entity
@@ -36,5 +35,11 @@ public class Schedule extends BaseEntity {
     //작성자 추가
     public void setUser(User user) {
         this.user = user;
+    }
+
+
+    public void updateSchedule(String title, String contents) {
+        this.title = title;
+        this.contents = contents;
     }
 }
