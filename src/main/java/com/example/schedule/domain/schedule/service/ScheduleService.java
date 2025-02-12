@@ -68,7 +68,7 @@ public class ScheduleService {
 
 
     }
-
+    @Transactional
     public void deleteSchedule(Long scheduleId, @NotBlank String password) {
         Schedule findSchedule = scheduleRepository.findByScheduleId(scheduleId)
                 .orElseThrow(() -> new IllegalArgumentException("해당 스케줄 ID가 존재하지 않습니다. ID: " + scheduleId));

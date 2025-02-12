@@ -5,6 +5,7 @@ import com.example.schedule.domain.user.dto.UserResponseDto;
 import com.example.schedule.domain.user.entity.User;
 import com.example.schedule.domain.user.repository.UserRepository;
 import jakarta.transaction.Transactional;
+import jakarta.validation.constraints.NotBlank;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -70,9 +71,12 @@ public class UserService {
     }
 
     @Transactional
-    public void delete(Long userId) {
+    public void delete(Long userId, @NotBlank String password) {
 
         User findUser = userRepository.findByIdOrElseThrow(userId);
+        if(!findUser.getPassword().equals(password)) {
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "비밀번호가 일치하지 않습니다.");
+        }
 
         userRepository.delete(findUser);
     }
