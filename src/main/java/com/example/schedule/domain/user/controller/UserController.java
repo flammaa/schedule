@@ -20,47 +20,47 @@ public class UserController {
         return new ResponseEntity<>(signUpResponseDto, HttpStatus.CREATED);
     }
 
-    @GetMapping("/users/{id}")
-    public ResponseEntity<UserResponseDto> FindById(@PathVariable Long id) {
+    @GetMapping("/users/{userId}")
+    public ResponseEntity<UserResponseDto> FindById(@PathVariable Long userId) {
 
-        UserResponseDto userResponseDto = userService.findById(id);
+        UserResponseDto userResponseDto = userService.findById(userId);
 
         return new ResponseEntity<>(userResponseDto, HttpStatus.OK);
     }
 
-    @PatchMapping("/users/password/{id}")
+    @PatchMapping("/users/password/{userId}")
     public ResponseEntity<Void> updatePassword(
-            @PathVariable Long id,
+            @PathVariable Long userId,
             @RequestBody UpdatePasswordRequestDto requestDto
             ) {
-        userService.updatePassword(id, requestDto.getOldPassword(), requestDto.getNewPassword());
+        userService.updatePassword(userId, requestDto.getOldPassword(), requestDto.getNewPassword());
 
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @PatchMapping("/users/username/{id}")
+    @PatchMapping("/users/username/{userId}")
     public ResponseEntity<Void> updateUsername(
-            @PathVariable Long id,
+            @PathVariable Long userId,
             @RequestBody UpdateUsernameRequestDto requestDto
     ) {
-        userService.updateUsername(id, requestDto.getVerifyPassword(), requestDto.getNewUsername());
+        userService.updateUsername(userId, requestDto.getVerifyPassword(), requestDto.getNewUsername());
 
         return new ResponseEntity<>(HttpStatus.OK);
     }
-    @PatchMapping("/users/email/{id}")
+    @PatchMapping("/users/email/{userId}")
     public ResponseEntity<Void> updateEmail(
-            @PathVariable Long id,
+            @PathVariable Long userId,
             @RequestBody UpdateEmailRequestDto requestDto
     ) {
-        userService.updateEmail(id, requestDto.getVerifyPassword(), requestDto.getNewEmail());
+        userService.updateEmail(userId, requestDto.getVerifyPassword(), requestDto.getNewEmail());
 
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @DeleteMapping("/users/{id}")
-    public ResponseEntity<Void> delete(@PathVariable Long id) {
+    @DeleteMapping("/users/{userId}")
+    public ResponseEntity<Void> delete(@PathVariable Long userId) {
 
-        userService.delete(id);
+        userService.delete(userId);
 
         return new ResponseEntity<>(HttpStatus.OK);
     }

@@ -10,7 +10,7 @@ import lombok.Getter;
 public class User extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long userId;
 
     @Column(nullable = false, unique = true) //이름 필수, 유일
     private String username;

@@ -9,16 +9,18 @@ import java.util.Optional;
 
 
 public interface UserRepository extends JpaRepository<User, Long> {
-    default User findByIdOrElseThrow(Long id) {
-        return findById(id)
+    default User findByIdOrElseThrow(Long userId) {
+        return findById(userId)
                 .orElseThrow(() ->
                         new ResponseStatusException(
                                 HttpStatus.NOT_FOUND,
-                                "Does not exist id = " + id)
+                                "Does not exist id = " + userId)
                 );
     }
 
     Optional<User> findByEmail(String email); //option genereric user
+
+    Long userId(Long userId);
 
     //교안내용
     //     public Long findByEmailAndPassword(String email, String password); {

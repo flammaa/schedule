@@ -23,16 +23,16 @@ public class UserService {
 
         User savedUser = userRepository.save(user);
 
-        return new SignUpResponseDto(savedUser.getId(), savedUser.getUsername(), savedUser.getEmail());
+        return new SignUpResponseDto(savedUser.getUserId(), savedUser.getUsername(), savedUser.getEmail());
     }
 
     @Transactional
-    public UserResponseDto findById(Long id) {
+    public UserResponseDto findById(Long userId) {
 
-        Optional<User> optionalUser = userRepository.findById(id);
+        Optional<User> optionalUser = userRepository.findById(userId);
 
         if (optionalUser.isEmpty()) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Does not exist id = " + id);
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Does not exist id = " + userId);
         }
 
         User findUser = optionalUser.get();
@@ -41,8 +41,8 @@ public class UserService {
     }
 
     @Transactional
-    public void updatePassword(Long id, String oldPassword, String newPassword) {
-        User findUser = userRepository.findByIdOrElseThrow(id);
+    public void updatePassword(Long userId, String oldPassword, String newPassword) {
+        User findUser = userRepository.findByIdOrElseThrow(userId);
 
         if(!findUser.getPassword().equals(oldPassword)) {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "비밀번호가 일치하지 않습니다.");
@@ -50,8 +50,8 @@ public class UserService {
         findUser.updatePassword(newPassword);
     }
     @Transactional
-    public void updateUsername(Long id, String verifyPassword, String newUsername) {
-        User findUser = userRepository.findByIdOrElseThrow(id);
+    public void updateUsername(Long userId, String verifyPassword, String newUsername) {
+        User findUser = userRepository.findByIdOrElseThrow(userId);
 
         if(!findUser.getPassword().equals(verifyPassword)) {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "비밀번호가 일치하지 않습니다.");
@@ -60,8 +60,8 @@ public class UserService {
     }
 
     @Transactional
-    public void updateEmail(Long id, String verifyPassword, String newEmail) {
-        User findUser = userRepository.findByIdOrElseThrow(id);
+    public void updateEmail(Long userId, String verifyPassword, String newEmail) {
+        User findUser = userRepository.findByIdOrElseThrow(userId);
 
         if(!findUser.getPassword().equals(verifyPassword)) {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "비밀번호가 일치하지 않습니다.");
@@ -70,9 +70,9 @@ public class UserService {
     }
 
     @Transactional
-    public void delete(Long id) {
+    public void delete(Long userId) {
 
-        User findUser = userRepository.findByIdOrElseThrow(id);
+        User findUser = userRepository.findByIdOrElseThrow(userId);
 
         userRepository.delete(findUser);
     }

@@ -3,14 +3,17 @@ package com.example.schedule.domain.schedule.entity;
 import com.example.schedule.domain.user.entity.User;
 import com.example.schedule.entity.BaseEntity;
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
+@Getter
 @Entity
 @Table(name = "schedule")
 public class Schedule extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long scheduleId;
 
     @Column(nullable = false)
     private String title;
@@ -19,6 +22,19 @@ public class Schedule extends BaseEntity {
     private String contents;
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "userId")
     private User user;
+
+    public Schedule() {
+    }
+
+    public Schedule(String title, String contents) {
+        this.title = title;
+        this.contents = contents;
+    }
+
+    //작성자 추가
+    public void setUser(User user) {
+        this.user = user;
+    }
 }
