@@ -12,7 +12,7 @@ import java.io.IOException;
 @Slf4j //log
 public class LoginFilter implements Filter {
 
-    private static final String[] WHITE_LIST = {"/", "/user/signup", "/login", "/logout"};
+    private static final String[] WHITE_LIST = {"/", "/users/signup", "/login", "/logout"};
 
 
     @Override
@@ -22,7 +22,7 @@ public class LoginFilter implements Filter {
         HttpServletRequest httpRequest = (HttpServletRequest) request;// request 다운 캐스팅
         String requestURI = httpRequest.getRequestURI();
 
-        HttpServletResponse httpResponse = (HttpServletResponse) response;
+        HttpServletResponse httpResponse = (HttpServletResponse) response; // 다양한 기능을 사용하기 위해 다운 캐스팅
 
         log.info("로그인 필터 로직 실행");
 
@@ -35,7 +35,7 @@ public class LoginFilter implements Filter {
             HttpSession session = httpRequest.getSession(false);
 
             // 로그인하지 않은 사용자인 경우
-            if (session == null || session.getAttribute("sessionKey값") == null) {
+            if (session == null || session.getAttribute("loginUser") == null) {
                 throw new RuntimeException("로그인 해주세요.");
             }
 

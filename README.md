@@ -34,28 +34,27 @@ For building and running the application you need:
 
 ## Schedule API
 
-|기능(feature) | Http method | URL | 상태코드(Status) |
-|-------------|-------------|-----|---------------|
-유저 생성 | `POST` | /api/users | `201`, `400`
-유저 조회 | `GET` | /api/users/{id} | `200`, `404`
-유저 목록 조회 | `GET` | /api/users | `200`, `400`
-유저 수정 | `PATCH` | /api/users/{id} | `200`, `400`, `404`
-유저 삭제 | `DELETE` | /api/users/{id} | `200`, `404`
+|기능(feature) | Http method | URL                       | 상태코드(Status) |
+|-------------|-------------|---------------------------|---------------|
+유저 생성 | `POST` | /api/users                | `201`, `400`
+유저 조회 | `GET` | /api/users/{id}           | `200`, `404`
+유저 수정 | `PATCH` | /api/users/(feature)/{id} | `200`, `400`, `404`
+유저 삭제 | `DELETE` | /api/users/{id}           | `200`, `404`
 |||
-로그인 | `POST` | /api/login | `201`, `400`
-로그아웃 | `POST` | /api/logout | `201`, `400`
+로그인 | `POST` | /api/login                | `201`, `400`
+로그아웃 | `POST` | /api/logout               | `201`, `400`
 |||
-일정 생성 | `POST` | /api/schedules | `201`, `400`
-일정 조회 | `GET` | /api//api/schedules/{id} | `200`, `404`
-일정 목록 조회 | `GET` | /api/schedules | `200`, `400`
-일정 수정 | `PATCH` | /api//api/schedules/{id} | `200`, `400`, `404`
-일정 삭제 | `DELETE` | /api//api/schedules/{id} | `200`, `404`
+일정 생성 | `POST` | /api/schedules            | `201`, `400`
+일정 조회 | `GET` | /api//api/schedules/{id}  | `200`, `404`
+일정 목록 조회 | `GET` | /api/schedules            | `200`, `400`
+일정 수정 | `PATCH` | /api//api/schedules/{id}  | `200`, `400`, `404`
+일정 삭제 | `DELETE` | /api//api/schedules/{id}  | `200`, `404`
 |||
-댓글 생성 | `POST` | /api/comments | `201`, `400`
-댓글 조회 | `GET` | /api/comments/{id} | `200`, `404`
-댓글 목록 조회 | `GET` | /api/sccomments | `200`, `400`
-댓글 수정 | `PATCH` | /api/comments/{id} | `200`, `400`, `404`
-댓글 삭제 | `DELETE` | /api/comments/{id} | `200`, `404`
+댓글 생성 | `POST` | /api/comments             | `201`, `400`
+댓글 조회 | `GET` | /api/comments/{id}        | `200`, `404`
+댓글 목록 조회 | `GET` | /api/sccomments           | `200`, `400`
+댓글 수정 | `PATCH` | /api/comments/{id}        | `200`, `400`, `404`
+댓글 삭제 | `DELETE` | /api/comments/{id}        | `200`, `404`
 
 
 
@@ -68,28 +67,21 @@ For building and running the application you need:
 # 주요기능(Main function)
 
 ## users
-### 유저 등록
-### 유저 조회
-### 유저 목록 조회
-### 유저 수정
-- 이름 수정
-  테스트
-  ```java
-  {
-  
-  }
-  ```
-  
-- 이메일 수정
-- 비밀번호 수정
-
-### 유저 삭제
-
-## login
-
-## logout
+| 기능 | URL                                | Request                                                             | Response                                                                 | Status | 
+|-----|------------------------------------|---------------------------------------------------------------------|--------------------------------------------------------------------------|--------|
+유저 등록 | localhost:8080/users/signup        | { <br/>"username": "test",  <br/>"email":"sparta@gmail.com", "password": "1234"<br/>} | {<br/>"id": 1, <br/>"username": "test", "email":"sparta@gmail.com"<br/>} | `201 Created`
+유저 조회 | localhost:8080/users/{id}          |  | {<br/> "username": "test", <br/>"email": "sparta@gmail.com"<br/>}        | `200 OK`
+이름 수정 | localhost:8080/users/username/{id} | {<br/> "verifyPassword":"1234", <br/>"newUsername": "changename"<br/>} |                                                                          | `200 OK`
+이메일 수정 | localhost:8080/users/email/{id}    | {<br/>"verifyPassword":"1234", <br/>"newEmail": "newemail@gmail.com"<br/>} | | `200 OK`
+비밀번호 수정 | localhost:8080/users/password/{id} | {<br/> "oldPassword": "1234", <br/>"newPassword": "1111"<br/>} | | `200 OK`
+유저 삭제 | | | `200 OK`
 
 
+## login & logout
+| 기능 | URL                                | Request                                                             | Response                                                                 | Status | 
+|-----|------------------------------------|---------------------------------------------------------------------|--------------------------------------------------------------------------|--------|
+login | localhost:8080/login | {<br/> "email": "sparta@gmail.com", <br/>"password": "1234" <br/>} | {<br/> "id": 1, <br/>"username": "test", "email": <br/>"sparta@gmail.com"<br/>} | `200 OK`
+logout| localhost:8080/logout | | 로그아웃 성공 | `200 OK`
 
 
 
