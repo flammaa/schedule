@@ -8,10 +8,10 @@ import lombok.Getter;
 @AllArgsConstructor
 public class LoginRequestDto {
 
-    @NotBlank
+    @NotBlank(message = "필수 입력입니다.")
     private final String email;
 
-    @NotBlank
+    @NotBlank(message = "필수 입력입니다.")
     private final String password;
 
 }

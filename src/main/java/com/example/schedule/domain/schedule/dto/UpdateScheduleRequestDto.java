@@ -5,13 +5,13 @@ import lombok.Getter;
 
 @Getter
 public class UpdateScheduleRequestDto {
-    @NotBlank
+    @NotBlank(message = "필수 입력입니다.")
     private final String password;
 
-    @NotBlank
+    @NotBlank(message = "필수 입력입니다.")
     private final String newTitle;
 
-    @NotBlank
+    @NotBlank(message = "필수 입력입니다.")
     private final String newContents;
 
 
