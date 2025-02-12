@@ -3,9 +3,11 @@ package com.example.schedule.domain.user.entity;
 import com.example.schedule.global.entity.BaseEntity;
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Getter
 @Entity
+@NoArgsConstructor
 @Table(name = "user")
 public class User extends BaseEntity {
     @Id
@@ -20,9 +22,6 @@ public class User extends BaseEntity {
 
     @Column(nullable = false, unique = true) // 필수, 유일
     private String password;
-
-    public User() {
-    }
 
     public User(String username, String email, String password) {
         this.username = username;

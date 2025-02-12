@@ -4,9 +4,11 @@ import com.example.schedule.domain.user.entity.User;
 import com.example.schedule.global.entity.BaseEntity;
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Getter
 @Entity
+@NoArgsConstructor
 @Table(name = "schedule")
 public class Schedule extends BaseEntity {
 
@@ -23,9 +25,6 @@ public class Schedule extends BaseEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "userId")
     private User user;
-
-    public Schedule() {
-    }
 
     public Schedule(String title, String contents) {
         this.title = title;

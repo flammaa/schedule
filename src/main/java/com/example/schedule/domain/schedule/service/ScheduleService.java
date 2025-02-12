@@ -6,7 +6,7 @@ import com.example.schedule.domain.schedule.repository.ScheduleRepository;
 import com.example.schedule.domain.user.entity.User;
 import com.example.schedule.domain.user.repository.UserRepository;
 import com.example.schedule.global.config.PasswordEncoder;
-import jakarta.transaction.Transactional;
+import org.springframework.transaction.annotation.Transactional;
 import jakarta.validation.constraints.NotBlank;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -42,14 +42,14 @@ public class ScheduleService {
                 schedule.getContents(),
                 schedule.getUser().getUserId());
     }
-    @Transactional
+    @Transactional(readOnly=true)
     public List<ScheduleResponseDto> findAll() {
         return scheduleRepository.findAll()
                 .stream()
                 .map(ScheduleResponseDto::toDto)
                 .toList();
     }
-    @Transactional
+    @Transactional(readOnly=true)
     public List<ScheduleResponseDto> getSchedulesByUserEmail(String email) {
         List<Schedule> schedules = scheduleRepository.findByUserEmail(email);
         return schedules.stream()

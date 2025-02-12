@@ -5,7 +5,7 @@ import com.example.schedule.domain.user.dto.UserResponseDto;
 import com.example.schedule.domain.user.entity.User;
 import com.example.schedule.domain.user.repository.UserRepository;
 import com.example.schedule.global.config.PasswordEncoder;
-import jakarta.transaction.Transactional;
+import org.springframework.transaction.annotation.Transactional;
 import jakarta.validation.constraints.NotBlank;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -32,7 +32,7 @@ public class UserService {
         return new SignUpResponseDto(savedUser.getUserId(), savedUser.getUsername(), savedUser.getEmail());
     }
 
-    @Transactional
+    @Transactional(readOnly=true)
     public UserResponseDto findById(Long userId) {
 
         Optional<User> optionalUser = userRepository.findById(userId);
