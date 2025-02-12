@@ -90,13 +90,13 @@ logout| localhost:8080/logout | | 로그아웃 성공 | `200 OK`
 <br/>
 
 ## shcedules
-| 기능 | URL                                | Request                                                             | Response                                                                 | Status | 
-|-----|------------------------------------|---------------------------------------------------------------------|--------------------------------------------------------------------------|--------|
+| 기능 | URL                                | Request                                                           | Response                                                                 | Status | 
+|-----|------------------------------------|-------------------------------------------------------------------|--------------------------------------------------------------------------|--------|
 일정 등록 | localhost:8080/schedules/{userId} | {<br/>"title": "제목", <br/>"contents": "내용", <br/>"username": "test"<br/>} | {<br/>"scheduleId": 1, <br/>"title": "제목", <br/>"contents": "내용", <br/>"userId": 1<br/>} | `201 Created`
 모든 일정 조회 | localhost:8080/schedules       |  | [<br/>    {<br/>        "scheduleId": 1,<br/>        "title": "제목",<br/>        "contents": "내용",<br/>        "userId": 1<br/>    }<br/>]    | `200 OK`
 일정 조회(이메일로) | localhost:8080/schedules/email/{email} |  | [<br/>    {<br/>        "scheduleId": 1,<br/>        "title": "제목",<br/>        "contents": "내용",<br/>        "userId": 1<br/>    }<br/>]     | `200 OK`
 일정 수정 | localhost:8080/schedules/{scheduleId}  | {<br/>    "password": "1234",<br/>    "newTitle": "새로운 제목",<br/>    "newContents": "새로운 내용"<br/>} | | `200 OK`
-유저 삭제 | localhost:8080/schedules/{scheduleId}  | {{<br/>    "password" : "1234"{<br/>} |  | `200 OK`
+유저 삭제 | localhost:8080/schedules/{scheduleId}  | {<br/>    "password" : "1234"<br/>} |  | `200 OK`
 
 <br/>
 
