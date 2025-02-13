@@ -1,7 +1,7 @@
 package com.example.schedule.domain.schedule.dto;
 
 import com.example.schedule.domain.schedule.entity.Schedule;
-import com.example.schedule.domain.schedule.repository.ScheduleRepository;
+
 import lombok.Getter;
 
 @Getter

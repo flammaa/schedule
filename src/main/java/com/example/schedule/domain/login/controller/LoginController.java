@@ -59,15 +59,4 @@ public class LoginController {
         return ResponseEntity.ok("로그아웃 성공");
     }
 
-
-
-
-//    @PostMapping("/login")
-//    public ResponseEntity<LoginResponseDto> login(@Valid @RequestBody LoginRequestDto requestDto) {
-//        LoginResponseDto loginResponseDto =
-//                loginService.login(requestDto.getEmail(), requestDto.getPassword());
-//
-//        return new ResponseEntity<>(loginResponseDto, HttpStatus.OK);
-//    }
-
 }
