@@ -53,16 +53,15 @@ For building and running the application you need:
 일정 수정 | `PATCH` | /api/schedules/{scheduleId} | `200`, `400`, `404`
 일정 삭제 | `DELETE` | /api/schedules/{scheduleId}  | `200`, `404`
 |||
-댓글 생성 | `POST` | /api/comments             | `201`, `400`
-댓글 조회 | `GET` | /api/comments/{id}        | `200`, `404`
-댓글 목록 조회 | `GET` | /api/sccomments           | `200`, `400`
-댓글 수정 | `PATCH` | /api/comments/{id}        | `200`, `400`, `404`
-댓글 삭제 | `DELETE` | /api/comments/{id}        | `200`, `404`
+댓글 생성 | `POST` | /api/schedules/{scheduleId}/comments             | `201`, `400`
+댓글 조회 | `GET` | /api/schedules/{scheduleId}/comments/{id}        | `200`, `404`
+댓글 수정 | `PATCH` | /api/schedules/{scheduleId}/comments/{id}        | `200`, `400`, `404`
+댓글 삭제 | `DELETE` | /api/schedules/{scheduleId}/comments/{id}        | `200`, `404`
 
 
 
 ## ERD
-
+![Image](https://github.com/user-attachments/assets/6cd782c2-17b9-4c0a-baf5-a260212fb2e3)
 
 
 
@@ -101,6 +100,13 @@ logout| localhost:8080/logout | | 로그아웃 성공 | `200 OK`
 <br/>
 
 ## comments
+| 기능 | URL                                | Request                                                           | Response                                                                 | Status | 
+|-----|------------------------------------|-------------------------------------------------------------------|--------------------------------------------------------------------------|--------|
+댓글 등록 ||||
+댓글 UserID로 조회 ||||
+댓글 수정 ||||
+댓글 삭제 ||||
+
 
 
 <br><br><br>
